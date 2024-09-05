@@ -114,6 +114,14 @@
                           class="mt-4"
                         />
                         <v-text-field
+                          label="Email"
+                          outlined
+                          dense
+                          color="blue"
+                          autocomplete="false"
+                          v-model="registerEmail"
+                        />
+                        <v-text-field
                           label="Senha"
                           outlined
                           dense
@@ -121,14 +129,6 @@
                           autocomplete="false"
                           type="password"
                           v-model="registerPassword"
-                        />
-                        <v-text-field
-                          label="Email"
-                          outlined
-                          dense
-                          color="blue"
-                          autocomplete="false"
-                          v-model="registerEmail"
                         />
                         <v-row>
                           <v-col cols="12" sm="7">
@@ -187,7 +187,7 @@ export default {
     async login() {
       try {
         const { data } = await axios.post('http://localhost:5000/login', {
-          nome_usuario: this.loginEmail,
+          email: this.loginEmail,
           senha: this.loginPassword
         });
         localStorage.setItem('access_token', data.access_token);
@@ -202,6 +202,7 @@ export default {
       try {
         await axios.post('http://localhost:5000/registro', {
           nome_usuario: this.registerUsername,
+          email: this.registerEmail,
           senha: this.registerPassword,
           e_instituicao: false // Adicionar este campo se for necessário para seu backend
         });
