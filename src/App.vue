@@ -1,47 +1,30 @@
 <template>
-  <div id="app">
-    <b-navbar toggleable="lg" type="dark" variant="dark" v-if="notIsLoginPage">
-      <b-navbar-brand href="#">ToDo List</b-navbar-brand>
-
-      <b-navbar-toggle target="nav-collapse"></b-navbar-toggle>
-
-      <b-collapse id="nav-collapse" is-nav>
-        <b-navbar-nav>
-          <b-nav-item to="/">Tarefas</b-nav-item>
-          <b-nav-item to="/form">Formulário</b-nav-item>
-        </b-navbar-nav>
-      </b-collapse>
-    </b-navbar>
-
-    <transition name="fade" mode="out-in">
-      <router-view />
-    </transition>
-
-  </div>
+  <v-app>
+    <!-- Verifica se a rota atual é diferente de 'login' -->
+    <AppNavbar v-if="!isLoginPage" />
+    <v-content class="ma-4">
+      <router-view></router-view>
+    </v-content>
+    <!-- Verifica se a rota atual é diferente de 'login' -->
+    <AppFooter v-if="!isLoginPage" />
+  </v-app>
 </template>
 
 <script>
+import AppNavbar from '../src/components/AppNavbar';
+import AppFooter from '../src/components/AppFooter';
 
 export default {
+  name: 'App',
+  components: {
+    AppNavbar,
+    AppFooter,
+  },
   computed: {
-    notIsLoginPage() {
-      return this.$route.name !== "login";
+    // Verifica se a rota atual é a página de login
+    isLoginPage() {
+      return this.$route.name === 'login';
     }
   }
 };
-
 </script>
-
-<style>
-.fade-enter-active,
-.fade-leave-active {
-  transition-duration: 0.2s;
-  transition-property: opacity;
-  transition-timing-function: ease;
-}
-
-.fade-enter,
-.fade-leave {
-  opacity: 0;
-}
-</style>
