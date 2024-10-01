@@ -118,6 +118,7 @@ export default {
         });
         localStorage.setItem('access_token', data.access_token);
         this.message = 'Login bem-sucedido!';
+        this.$router.push('/home');
       } catch (error) {
         this.message = 'Credenciais inválidas';
         console.error('Erro de login:', error);
