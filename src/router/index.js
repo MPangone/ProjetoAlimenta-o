@@ -2,7 +2,7 @@ import Vue from 'vue'
 import VueRouter from 'vue-router'
 import LoginView from '@/views/LoginView.vue'
 import AppDashboardView from '@/views/AppDashboardView.vue'
-import AppProjectsView from '@/views/AppProjectsView.vue'
+import DoacoesView from '@/views/Doacoes.vue'
 import AppTeamView from '@/views/AppTeamView.vue'
 import HomeView from '@/views/HomeView.vue'
 Vue.use(VueRouter)
@@ -18,9 +18,9 @@ const routes = [
     component: AppDashboardView
   },
   {
-    path: '/projects',
-    name: 'projects',
-    component: AppProjectsView
+    path: '/doacoes',
+    name: 'doacoes',
+    component: DoacoesView
   },
   {
     path: '/team',

@@ -59,9 +59,10 @@
     data: () => ({
        drawer: true,
        links :[
-           {icon: 'dashboard', text:'Dashboard', route: '/dashboard'},
-           {icon: 'folder', text:'My Project', route: '/projects'},
-           {icon: 'person', text:'Team', route: '/team'}
+       {icon: 'home', text:'Home', route: '/home'},
+     //      {icon: 'dashboard', text:'Dashboard', route: '/dashboard'},
+           {icon: 'folder', text:'Doações', route: '/doacoes'},
+           // {icon: 'person', text:'Team', route: '/team'}
        ]
       
      }),
