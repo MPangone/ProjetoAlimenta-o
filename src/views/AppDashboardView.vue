@@ -1,162 +1,158 @@
-/* eslint-disable */
 <template>
-  <div class="team">
-    <h1 class="subheading grey--text">Dashboard</h1>
-    <v-container >
-      <v-layout row wrap>
-         <v-flex
-        sm6
-        xs12
-        md6
-        lg3
-      >
-       <v-card class="ma-3">
-    <v-list-item  >
-       <v-list-item-avatar
-        tile
-        class="mt-n7"
-      >
-      <v-sheet color="green" width="80" height="80" elevation="10">
-            <v-icon dark large>store</v-icon>
-      </v-sheet>
-      </v-list-item-avatar>
-      <v-list-item-content>
-        <div class="overline text-right">Article</div>
-        <v-list-item-title class="headline mb-1 text-right" >523614</v-list-item-title>
-        <div><v-divider></v-divider></div>
-      </v-list-item-content> 
-    </v-list-item>
-    <v-card-actions>
-      <v-icon text class="ma-2">person</v-icon>
-      <div class="overline">Iyad</div>
-    </v-card-actions>
-  </v-card>
-      </v-flex>
-       <v-flex
-        sm6
-        xs12
-        md6
-        lg3
-      >
-       <v-card class="ma-3">
-    <v-list-item>
-       <v-list-item-avatar
-        tile
-        class="mt-n7"
-      >
-      <v-sheet color="#F44336" width="80" height="80" elevation="10">
-            <v-icon dark large>subscriptions</v-icon>
-      </v-sheet>
-      </v-list-item-avatar>
-      <v-list-item-content>
-        <div class="overline text-right">Abonné</div>
-        <v-list-item-title class="headline mb-1 text-right" >+700</v-list-item-title>
-        <div><v-divider></v-divider></div>
-      </v-list-item-content> 
-    </v-list-item>
-    <v-card-actions>
-      <v-icon text class="ma-2">subscriptions</v-icon>
-      <div class="overline">Projeto Alimentação</div>
-    </v-card-actions>
-  </v-card>
-      </v-flex>
-       <v-flex
-        sm6
-        xs12
-        md6
-        lg3
-      >
-       <v-card class="ma-3">
-    <v-list-item>
-       <v-list-item-avatar
-        tile
-        class="mt-n7"
-      >
-      <v-sheet color="#03A9F4" width="80" height="80" elevation="10">
-            <v-icon dark large>add_shopping_cart</v-icon>
-      </v-sheet>
-      </v-list-item-avatar>
-      <v-list-item-content>
-        <div class="overline text-right">Shopping</div>
-        <v-list-item-title class="headline mb-1 text-right" >$34,245</v-list-item-title>
-        <div><v-divider></v-divider></div>
-      </v-list-item-content> 
-    </v-list-item>
-    <v-card-actions>
-      <v-icon text class="ma-2">credit_card</v-icon>
-      <div class="overline">VISA Card</div>
-    </v-card-actions>
-  </v-card>
-      </v-flex>
-       <v-flex
-        sm6
-        xs12
-        md6
-        lg3
-      >
-       <v-card class="ma-3">
-    <v-list-item >
-       <v-list-item-avatar
-        tile
-        class="mt-n7"
-      >
-      <v-sheet color="#FFC107" width="80" height="80" elevation="10">
-            <v-icon dark large>folder_shared</v-icon>
-      </v-sheet>
-      </v-list-item-avatar>
-      <v-list-item-content>
-        <div class="overline text-right">Folder shared</div>
-        <v-list-item-title class="headline mb-1 text-right" >1730</v-list-item-title>
-        <div><v-divider></v-divider></div>
-      </v-list-item-content> 
-    </v-list-item>
-    <v-card-actions>
-      <v-icon text class="ma-2">folder</v-icon>
-      <div class="overline">Prodect</div>
-    </v-card-actions>
-  </v-card>
-      </v-flex>
-        <v-flex xs12 sm6 md4 lg3 v-for="person in team" :key="person.name">
-              <v-card class="text-center ma-3">
-                <v-responsive class="pt-4">
-                   <v-avatar size="100" class="red lighten-2">
-                     <img :src="person.avatar" alt="" >
-                   </v-avatar>
-                </v-responsive>
-                <v-card-text>
-                  <div class="subheading">{{person.name}}</div>
-                  <div class="grey--text">{{person.role}}</div>
-                </v-card-text>
-                <v-card-actions>
-                    <v-btn outlined color="orange">
-                        <v-icon small left >message</v-icon>
-                        <span>Message</span>
-                    </v-btn>
-                </v-card-actions>
-              </v-card>
-        </v-flex>
-       
+  <div class="instituicoes">
+    <h1 class="subheading grey--text">Instituições</h1>
+    <v-container>
+      <v-layout row wrap class="mb-4">
+        <v-btn small outlined color="green" @click="criarDialog = true" class="mr-2" dark>
+          <v-icon left small>add</v-icon>
+          <span class="caption text-lowercase">Criar Instituição</span>
+        </v-btn>
       </v-layout>
+      <v-card flat v-for="instituicao in instituicoes" :key="instituicao.id" class="mb-1">
+        <v-layout row wrap :class="`pa-3 instituicao`">
+          <v-flex xs12 md6>
+            <div class="caption grey--text">Nome</div>
+            <div>{{ instituicao.nome }}</div>
+          </v-flex>
+          <v-flex xs6 sm4 md2>
+            <div class="caption grey--text">Endereço</div>
+            <div>{{ instituicao.endereco }}</div>
+          </v-flex>
+          <v-flex xs6 sm4 md2>
+            <div class="caption grey--text">Telefone</div>
+            <div>{{ instituicao.telefone }}</div>
+          </v-flex>
+          <v-flex xs12 md2>
+            <v-btn small outlined color="blue" @click="editarInstituicao(instituicao)" class="mr-2" dark>
+              <v-icon left small>edit</v-icon>
+              <span class="caption text-lowercase">Editar</span>
+            </v-btn>
+            <v-btn small outlined color="red" @click="deletarInstituicao(instituicao)" class="mr-2" dark>
+              <v-icon left small>delete</v-icon>
+              <span class="caption text-lowercase">Deletar</span>
+            </v-btn>
+          </v-flex>
+        </v-layout>
+      </v-card>
     </v-container>
+
+    <!-- Criar Instituição Dialog -->
+    <v-dialog v-model="criarDialog" max-width="500px">
+      <v-card>
+        <v-card-title>
+          <span class="headline">Criar Instituição</span>
+        </v-card-title>
+        <v-card-text>
+          <v-form>
+            <v-text-field v-model="novaInstituicao.nome" label="Nome" required></v-text-field>
+            <v-text-field v-model="novaInstituicao.endereco" label="Endereço" required></v-text-field>
+            <v-text-field v-model="novaInstituicao.telefone" label="Telefone" required></v-text-field>
+          </v-form>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" flat @click="criarDialog = false">Cancelar</v-btn>
+          <v-btn color="blue darken-1" flat @click="criarInstituicao">Criar</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
+
+    <!-- Editar Instituição Dialog -->
+    <v-dialog v-model="editarDialog" max-width="500px">
+      <v-card>
+        <v-card-title>
+          <span class="headline">Editar Instituição</span>
+        </v-card-title>
+        <v-card-text>
+          <v-form>
+            <v-text-field v-model="instituicaoEditada.nome" label="Nome" required></v-text-field>
+            <v-text-field v-model="instituicaoEditada.endereco" label="Endereço" required></v-text-field>
+            <v-text-field v-model="instituicaoEditada.telefone" label="Telefone" required></v-text-field>
+          </v-form>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" flat @click="editarDialog = false">Cancelar</v-btn>
+          <v-btn color="blue darken-1" flat @click="atualizarInstituicao">Atualizar</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
   </div>
 </template>
 
 <script>
-// @ is an alias to /src
-
+import axios from 'axios';
 
 export default {
-  name: 'team',
-  components: {
-   
-  },
-  data : () => ({
-    team: [
-      {name: 'Iyad', role: 'web developer', avatar:'/img1.png'},
-      {name: 'Reda', role: 'Graphic designer', avatar:'/img2.png'},
-      {name: 'Zineb', role: 'web developer', avatar:'/img3.png'},
-      {name: 'Hu TechGroup', role: 'Desktop developer', avatar:'/img4.png'},
-    ]
+  name: 'instituicoes',
+  data: () => ({
+    instituicoes: [],
+    criarDialog: false,
+    editarDialog: false,
+    novaInstituicao: {
+      nome: '',
+      endereco: '',
+      telefone: ''
+    },
+    instituicaoEditada: {
+      id: null,
+      nome: '',
+      endereco: '',
+      telefone: ''
+    }
   }),
+  methods: {
+    async buscarInstituicoes() {
+      try {
+        const response = await axios.get('http://localhost:5000/instituicoes');
+        this.instituicoes = response.data;
+      } catch (error) {
+        console.error('Erro ao buscar instituições:', error);
+      }
+    },
+    async criarInstituicao() {
+      try {
+        const response = await axios.post('http://localhost:5000/instituicoes', this.novaInstituicao);
+        this.instituicoes.push(response.data);
+        this.criarDialog = false;
+        this.novaInstituicao = { nome: '', endereco: '', telefone: '' };
+      } catch (error) {
+        console.error('Erro ao criar instituição:', error);
+      }
+    },
+    editarInstituicao(instituicao) {
+      this.instituicaoEditada = { ...instituicao }; 
+      this.editarDialog = true;
+    },
+    async atualizarInstituicao() {
+      try {
+        const response = await axios.put(`http://localhost:5000/instituicoes/${this.instituicaoEditada.id}`, this.instituicaoEditada);
+        const index = this.instituicoes.findIndex(inst => inst.id === this.instituicaoEditada.id);
+        this.instituicoes.splice(index, 1, response.data);
+        this.editarDialog = false;
+      } catch (error) {
+        console.error('Erro ao atualizar instituição:', error);
+      }
+    },
+    async deletarInstituicao(instituicao) {
+      try {
+        await axios.delete(`http://localhost:5000/instituicoes/${instituicao.id}`);
+        const index = this.instituicoes.indexOf(instituicao);
+        this.instituicoes.splice(index, 1);
+      } catch (error) {
+        console.error('Erro ao deletar instituição:', error);
+      }
+    }
+  },
+  mounted() {
+    this.buscarInstituicoes();
+  }
 }
 </script>
+
+<style scoped>
+.instituicao {
+  border: 1px solid #e0e0e0;
+  border-radius: 5px;
+}
+</style>

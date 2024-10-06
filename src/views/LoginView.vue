@@ -116,7 +116,11 @@ export default {
           email: this.loginEmail,
           senha: this.loginPassword
         });
+
+        // Salva o token de acesso e o ID do usuário no localStorage
         localStorage.setItem('access_token', data.access_token);
+        localStorage.setItem('user_id', data.id); // Adicione isso para salvar o ID do usuário
+
         this.message = 'Login bem-sucedido!';
         this.$router.push('/home');
       } catch (error) {
@@ -143,15 +147,15 @@ export default {
     },
     getValidation(field) {
       if (field === 'email') {
-        return this.loginEmail.length > 0 && this.loginEmail.includes('@') ? true : false;
+        return this.loginEmail.length > 0 && this.loginEmail.includes('@');
       } else if (field === 'password') {
-        return this.loginPassword.length > 0 ? true : false;
+        return this.loginPassword.length > 0;
       } else if (field === 'registerUsername') {
-        return this.registerUsername.length > 0 ? true : false;
+        return this.registerUsername.length > 0;
       } else if (field === 'registerEmail') {
-        return this.registerEmail.length > 0 && this.registerEmail.includes('@') ? true : false;
+        return this.registerEmail.length > 0 && this.registerEmail.includes('@');
       } else if (field === 'registerPassword') {
-        return this.registerPassword.length > 0 ? true : false;
+        return this.registerPassword.length > 0;
       }
       return null;
     }

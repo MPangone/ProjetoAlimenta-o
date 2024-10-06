@@ -15,7 +15,7 @@
     >
 
       <v-card-text class="py-2 white--text text-center">
-        {{ new Date().getFullYear() }} — <strong>© Murilo, Inc.  </strong>
+        {{ new Date().getFullYear() }} — <strong>© AlimentAção.  </strong>
       </v-card-text>
     </v-card>
   </v-footer>
