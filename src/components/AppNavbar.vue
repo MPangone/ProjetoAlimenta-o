@@ -3,8 +3,8 @@
     <v-app-bar color="red" dark app>
       <v-app-bar-nav-icon @click.stop="drawer = !drawer"></v-app-bar-nav-icon>
       <v-toolbar-title class="text-uppercase ">
-        <span class="font-weight-light">Projeto</span>
-        <span>Alimentação</span>
+        <!-- <span class="font-weight-light">AlimentAção</span> -->
+        <span>AlimentAção</span>
       </v-toolbar-title>
       <v-spacer></v-spacer>
 
@@ -25,9 +25,9 @@
       <v-layout column align-center>
         <v-flex class="mt-5">
           <v-avatar size="100">
-            <img src="../assets/profile.avif" alt="">
+            <!-- <img src="../assets/profile.avif" alt=""> -->
           </v-avatar>
-          <p class="white--text subheading mt-1 text-center">Gustavo Lima</p>
+          <p class="white--text subheading mt-1 text-center">{{ username }}</p>
         </v-flex>
         <v-flex class="mt-4 mb-4">
           <AppPopup />
@@ -55,21 +55,32 @@ export default {
     return {
       drawer: false,
       links: [
-        { icon: 'dashboard', text: 'Instituições', route: '/dashboard' },
-        { icon: 'folder', text: 'My Project', route: '/projects' },
-        { icon: 'person', text: 'Team', route: '/team' }
+        // { icon: 'dashboard', text: 'Instituições', route: '/dashboard' },
+        { icon: 'person', text: 'Home', route: '/home' },
+        { icon: 'dashboard', text: 'Instituições', route: '/instituicao' },
+        { icon: 'folder', text: 'Doações', route: '/doacoes' },
       ]
     };
   },
+  mounted() {
+    const storedUsername = sessionStorage.getItem('username');
+    if (storedUsername) {
+      this.username = storedUsername;
+    }
+  },
   methods: {
     sair() {
-      localStorage.removeItem('token'); // Remova o token do localStorage
+      sessionStorage.removeItem('token'); // Remova o token do sessionStorage
+      sessionStorage.removeItem('access_token');
+      sessionStorage.removeItem('user_id');
+      sessionStorage.removeItem('username');
       this.$router.push({ path: '/login' }); // Redirecione para o login
     }
   },
   components: {
     AppPopup
   }
+  
 }
 </script>
 

@@ -65,6 +65,31 @@
             ></b-form-input>
           </b-form-group>
 
+          <!-- Novo Campo CPF/CNPJ -->
+          <b-form-group label="CPF/CNPJ" label-for="registerCpfCnpj" class="mb-3">
+            <b-form-input
+              id="registerCpfCnpj"
+              type="text"
+              placeholder="Digite seu CPF ou CNPJ"
+              v-model.trim="registerCpfCnpj"
+              v-mask="['###.###.###-##', '##.###.###/####-##']"
+              :state="getValidation('cpfCnpj')"
+            ></b-form-input>
+          </b-form-group>
+
+          <!-- Novo Campo Telefone -->
+          <b-form-group label="Telefone" label-for="registerTelefone" class="mb-3">
+            <b-form-input
+              id="registerTelefone"
+              type="text"
+              placeholder="Digite seu telefone"
+              v-model.trim="registerTelefone"
+              v-mask="['(##) ####-####', '(##) #####-####']"
+              :state="getValidation('telefone')"
+            ></b-form-input>
+          </b-form-group>
+
+
           <b-form-group label-for="registerPassword" class="mb-2">
             <label>Senha</label>
             <b-form-input
@@ -74,6 +99,10 @@
               v-model.trim="registerPassword"
               :state="getValidation('registerPassword')"
             ></b-form-input>
+          </b-form-group>
+
+          <b-form-group>
+            <b-form-checkbox v-model="eInstituicao">Sou uma instituição</b-form-checkbox>
           </b-form-group>
 
           <b-button type="button" variant="primary" block @click="register" class="mb-1">
@@ -106,7 +135,10 @@ export default {
       registerUsername: '',
       registerPassword: '',
       registerEmail: '',
-      message: ''
+      message: '',
+      registerCpfCnpj: '', 
+      registerTelefone: '',
+      eInstituicao: false, 
     };
   },
   methods: {
@@ -114,12 +146,15 @@ export default {
       try {
         const { data } = await axios.post('http://localhost:5000/login', {
           email: this.loginEmail,
-          senha: this.loginPassword
+          senha: this.loginPassword,
         });
 
-        // Salva o token de acesso e o ID do usuário no localStorage
-        localStorage.setItem('access_token', data.access_token);
-        localStorage.setItem('user_id', data.id); // Adicione isso para salvar o ID do usuário
+        // Salva o token de acesso e o ID do usuário no sessionStorage
+        sessionStorage.setItem('access_token', data.access_token);
+        sessionStorage.setItem('user_id', data.id);
+        sessionStorage.setItem('username', data.username);
+        // console.log('ID do usuário armazenado:', data.id);
+
 
         this.message = 'Login bem-sucedido!';
         this.$router.push('/home');
@@ -130,13 +165,18 @@ export default {
     },
     async register() {
       try {
+        const cpfCnpjSemMascara = this.registerCpfCnpj.replace(/\D/g, '');
+        const telefoneSemMascara = this.registerTelefone.replace(/\D/g, '');
         await axios.post('http://localhost:5000/registro', {
           nome_usuario: this.registerUsername,
           email: this.registerEmail,
           senha: this.registerPassword,
-          e_instituicao: false
+          e_instituicao: this.eInstituicao,
+          cpf_cnpj: cpfCnpjSemMascara,
+          telefone: telefoneSemMascara
         });
         this.message = 'Cadastro bem-sucedido!';
+        location.reload();
       } catch (error) {
         this.message = 'Erro ao cadastrar';
         console.error('Erro de cadastro:', error);
@@ -156,6 +196,14 @@ export default {
         return this.registerEmail.length > 0 && this.registerEmail.includes('@');
       } else if (field === 'registerPassword') {
         return this.registerPassword.length > 0;
+      } else if (field === 'cpfCnpj') {
+        const cpfCnpj = this.registerCpfCnpj.replace(/\D/g, '');
+        return cpfCnpj.length === 11 || cpfCnpj.length === 14;
+      } else if (field === 'telefone') {
+        const telefone = this.registerTelefone.replace(/\D/g, '');
+        return telefone.length === 10 || telefone.length === 11;
+      } else if (field === 'terms') {
+        return this.acceptedTerms;  
       }
       return null;
     }

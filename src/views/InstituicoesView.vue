@@ -47,6 +47,7 @@
             <v-text-field v-model="novaInstituicao.nome" label="Nome" required></v-text-field>
             <v-text-field v-model="novaInstituicao.endereco" label="Endereço" required></v-text-field>
             <v-text-field v-model="novaInstituicao.telefone" label="Telefone" required></v-text-field>
+            <v-text-field v-model="novaInstituicao.id_usuario" label="Usuário" readonly solo></v-text-field>
           </v-form>
         </v-card-text>
         <v-card-actions>
@@ -92,7 +93,8 @@ export default {
     novaInstituicao: {
       nome: '',
       endereco: '',
-      telefone: ''
+      telefone: '',
+      id_usuario: '',
     },
     instituicaoEditada: {
       id: null,
@@ -115,7 +117,7 @@ export default {
         const response = await axios.post('http://localhost:5000/instituicoes', this.novaInstituicao);
         this.instituicoes.push(response.data);
         this.criarDialog = false;
-        this.novaInstituicao = { nome: '', endereco: '', telefone: '' };
+        this.novaInstituicao = { nome: '', endereco: '', telefone: '', id_usuario: ''};
       } catch (error) {
         console.error('Erro ao criar instituição:', error);
       }
@@ -146,6 +148,10 @@ export default {
   },
   mounted() {
     this.buscarInstituicoes();
+    const idUsuarioLogado = sessionStorage.getItem('user_id');
+    if (idUsuarioLogado) {
+      this.novaInstituicao.id_usuario = idUsuarioLogado;
+    }
   }
 }
 </script>
