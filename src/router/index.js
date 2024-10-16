@@ -5,6 +5,7 @@ import DoacoesView from '@/views/DoacoesView.vue'
 import AppTeamView from '@/views/AppTeamView.vue'
 import HomeView from '@/views/HomeView.vue'
 import InstituicoesView from '@/views/InstituicoesView.vue'
+import PerfilView from '@/views/PerfilView.vue'
 Vue.use(VueRouter)
 
 const routes = [
@@ -36,6 +37,11 @@ const routes = [
     path: '/home',
     name: 'home',
     component: HomeView
+  },
+  {
+    path: '/perfil',
+    name: 'perfil',
+    component: PerfilView
   },
 ]
 

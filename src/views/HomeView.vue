@@ -14,7 +14,7 @@
               </p>
             </v-card-text>
             <v-card-actions>
-              <v-btn color="primary" @click="navegarParaDoacao">Faça uma Doação</v-btn>
+              <v-btn color="primary" @click="navegarParaDoacoes">Faça uma Doação</v-btn>
             </v-card-actions>
           </v-card>
         </v-flex>
@@ -87,8 +87,8 @@ export default {
     };
   },
   methods: {
-    navegarParaDoacao() {
-      this.$router.push('/doacao'); // Altere para a rota de doação correta
+    navegarParaDoacoes() {
+      this.$router.push('/doacoes'); // Altere para a rota de doação correta
     },
     navegarParaCadastro() {
       this.$router.push('/login'); // Altere para a rota de cadastro correta
