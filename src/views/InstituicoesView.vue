@@ -22,6 +22,10 @@
             <div class="caption grey--text">Telefone</div>
             <div>{{ instituicao.telefone }}</div>
           </v-flex>
+          <v-flex xs6 sm4 md2>
+            <div class="caption grey--text">CNPJ</div>
+            <div>{{ instituicao.cnpj }}</div>
+          </v-flex>
           <v-flex xs12 md2>
             <v-btn small outlined color="blue" @click="editarInstituicao(instituicao)" class="mr-2" dark>
               <v-icon left small>edit</v-icon>
@@ -47,6 +51,7 @@
             <v-text-field v-model="novaInstituicao.nome" label="Nome" required></v-text-field>
             <v-text-field v-model="novaInstituicao.endereco" label="Endereço" required></v-text-field>
             <v-text-field v-model="novaInstituicao.telefone" label="Telefone" required></v-text-field>
+            <v-text-field v-model="novaInstituicao.cnpj" label="CNPJ" required></v-text-field>
             <v-text-field v-model="novaInstituicao.id_usuario" label="Usuário" readonly solo></v-text-field>
           </v-form>
         </v-card-text>
@@ -69,6 +74,7 @@
             <v-text-field v-model="instituicaoEditada.nome" label="Nome" required></v-text-field>
             <v-text-field v-model="instituicaoEditada.endereco" label="Endereço" required></v-text-field>
             <v-text-field v-model="instituicaoEditada.telefone" label="Telefone" required></v-text-field>
+            <v-text-field v-model="instituicaoEditada.cnpj" label="CNPJ" required></v-text-field>
           </v-form>
         </v-card-text>
         <v-card-actions>
@@ -94,13 +100,15 @@ export default {
       nome: '',
       endereco: '',
       telefone: '',
+      cnpj: '',
       id_usuario: '',
     },
     instituicaoEditada: {
       id: null,
       nome: '',
       endereco: '',
-      telefone: ''
+      telefone: '',
+      cnpj: '',
     }
   }),
   methods: {
@@ -115,9 +123,10 @@ export default {
     async criarInstituicao() {
       try {
         const response = await axios.post('http://localhost:5000/instituicoes', this.novaInstituicao);
+        console.log(this.novaInstituicao.cnpj);
         this.instituicoes.push(response.data);
         this.criarDialog = false;
-        this.novaInstituicao = { nome: '', endereco: '', telefone: '', id_usuario: ''};
+        this.novaInstituicao = { nome: '', endereco: '', telefone: '', cnpj: '', id_usuario: ''};
       } catch (error) {
         console.error('Erro ao criar instituição:', error);
       }

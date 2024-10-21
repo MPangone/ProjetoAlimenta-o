@@ -55,9 +55,9 @@ export default {
     return {
       drawer: false,
       links: [
-        // { icon: 'dashboard', text: 'Instituições', route: '/dashboard' },
-        { icon: 'person', text: 'Home', route: '/home' },
-        { icon: 'dashboard', text: 'Instituições', route: '/instituicao' },
+        { icon: 'house', text: 'Home', route: '/home' },
+        { icon: 'person', text: 'Perfil', route: '/perfil' },
+        // { icon: 'dashboard', text: 'Instituições', route: '/instituicao' },
         { icon: 'folder', text: 'Doações', route: '/doacoes' },
       ]
     };
