@@ -31,31 +31,11 @@
             </v-row>
           </v-card-text>
         </v-card>
-  
-        <!-- Informações da Instituição -->
-        <v-card flat v-if="instituicao">
-          <v-card-title>
-            <span class="headline">Informações da Instituição</span>
-            <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="editarInstituicaoDialog = true">Editar</v-btn>
-          </v-card-title>
-          <v-card-text>
-            <v-row>
-              <v-col cols="12" md="6">
-                <div class="caption grey--text">Nome</div>
-                <div>{{ instituicao.nome }}</div>
-              </v-col>
-              <v-col cols="12" md="6">
-                <div class="caption grey--text">Endereço</div>
-                <div>{{ instituicao.endereco }}</div>
-              </v-col>
-              <v-col cols="12" md="6">
-                <div class="caption grey--text">Telefone</div>
-                <div>{{ instituicao.telefone }}</div>
-              </v-col>
-            </v-row>
-          </v-card-text>
-        </v-card>
+
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="green darken-1" text @click="navegarParaInstituicao">Ir para Instituição</v-btn>
+        </v-card-actions>
   
         <!-- Editar Usuário Dialog -->
         <v-dialog v-model="editarUsuarioDialog" max-width="500px">
@@ -166,7 +146,10 @@
         } catch (error) {
           console.error('Erro ao atualizar instituição:', error);
         }
-      }
+      },
+      navegarParaInstituicao() {
+        this.$router.push({ path: '/instituicao' });
+      },
     },
     mounted() {
       this.buscarUsuario();
