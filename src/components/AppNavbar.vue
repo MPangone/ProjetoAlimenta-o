@@ -58,7 +58,7 @@ export default {
         { icon: 'house', text: 'Home', route: '/home' },
         { icon: 'person', text: 'Perfil', route: '/perfil' },
         // { icon: 'dashboard', text: 'Instituições', route: '/instituicao' },
-        { icon: 'folder', text: 'Doações', route: '/doacoes' },
+        { icon: 'mdi-food', text: 'Doações', route: '/doacoes' },
       ]
     };
   },

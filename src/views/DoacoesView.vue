@@ -13,6 +13,11 @@
         :items-per-page="5"
         class="elevation-1"
       >
+        <!-- Formatação da Data da Doação -->
+        <template v-slot:item.data="{ item }">
+          <span>{{ new Date(item.data).toLocaleDateString('pt-BR') }}</span>
+        </template>
+
         <template v-slot:item.actions="{ item }">
           <v-btn icon @click="editarDoacao(item)">
             <v-icon>mdi-pencil</v-icon>
@@ -23,6 +28,7 @@
         </template>
       </v-data-table>
 
+      <!-- Restante do código -->
       <v-dialog v-model="dialogo" persistent max-width="800px">
         <v-card>
           <v-card-title>
