@@ -47,7 +47,7 @@ const routes = [
   {
     path: '/doacoesinstituicoes',
     name: 'doacoesinstituicoes',
-    component: DoacoesInstituicoesView
+    component: DoacoesInstituicoesView,
   },
 ]
 
