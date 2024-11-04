@@ -1,227 +1,108 @@
 <template>
-  <v-container>
-    <v-row align="center" justify="center">
-      <v-col cols="12" sm="16">
-        <v-card class="elevation-6 mt-10">
-          <v-window v-model="step">
-            <!-- Tela de Login -->
-            <v-window-item :value="1">
-              <v-row>
-                <v-col cols="12" md="6">
-                  <v-card-text class="mt-12">
-                    <h4 class="text-center">Entrar na Sua Conta</h4>
-                    <h6 class="text-center grey--text">
-                      Faça login na sua conta para continuar construindo <br> e editando seus fluxos de onboarding
-                    </h6>
-                    <v-row align="center" justify="center">
-                      <v-col cols="12" sm="8">
-                        <v-text-field
-                          label="Email"
-                          outlined
-                          dense
-                          color="blue"
-                          autocomplete="false"
-                          v-model="loginEmail"
-                          class="mt-16"
-                        />
-                        <v-text-field
-                          label="Senha"
-                          outlined
-                          dense
-                          color="blue"
-                          autocomplete="false"
-                          type="password"
-                          v-model="loginPassword"
-                        />
-                        <v-row>
-                          <v-col cols="12" sm="7">
-                            <v-checkbox
-                              label="Lembrar de Mim"
-                              class="mt-n1"
-                              color="blue"
-                            ></v-checkbox>
-                          </v-col>
-                          <v-col cols="12" sm="5">
-                            <span class="caption blue--text">Esqueceu a senha</span>
-                          </v-col>
-                        </v-row>
-                        <v-btn color="blue" dark block tile @click="login">Entrar</v-btn>
+  <div class="home">
+    <v-container>
+      <h1 class="subheading grey--text text-center">Bem-vindo ao AlimentAção!</h1>
+      <v-layout row wrap>
+        <v-flex xs12 md6>
+          <v-card class="mx-auto" max-width="400">
+            <v-card-title>
+              <span class="headline">O que é o AlimentAção?</span>
+            </v-card-title>
+            <v-card-text>
+              <p>
+                O AlimentAção é uma plataforma que conecta doadores de alimentos a instituições de caridade. Junte-se a nós na luta contra a fome!
+              </p>
+            </v-card-text>
+            <v-card-actions>
+              <v-btn color="primary" @click="navegarParaDoacoes">Faça uma Doação</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-flex>
+        <v-flex xs12 md6>
+          <v-card class="mx-auto" max-width="400">
+            <v-card-title>
+              <span class="headline">Como Funciona?</span>
+            </v-card-title>
+            <v-card-text>
+              <p>
+                1. Cadastre-se como doador ou instituição.<br />
+                2. Ofereça alimentos que você pode doar.<br />
+                3. As instituições interessadas entrarão em contato com você.
+              </p>
+            </v-card-text>
+            <v-card-actions>
+              <!-- <v-btn color="primary" @click="navegarParaCadastro">Cadastre-se</v-btn> -->
+            </v-card-actions>
+          </v-card>
+        </v-flex>
+        <!-- <v-flex xs12 md6>
+          <v-card class="mx-auto" max-width="400">
+            <v-card-title>
+              <span class="headline">Instituições</span>
+            </v-card-title>
+            <v-card-text>
+              <p>
+                1. Cadastre-se como doador ou instituição.<br />
+                2. Ofereça alimentos que você pode doar.<br />
+                3. As instituições interessadas entrarão em contato com você.
+              </p>
+            </v-card-text>
+            <v-card-actions>
+              <v-btn color="primary" @click="navegarParaCadastro">Cadastre-se</v-btn>
+            </v-card-actions>
+          </v-card>
+        </v-flex> -->
+      </v-layout>
 
-                        <h5 class="text-center grey--text mt-4 mb-3">Ou entre usando</h5>
-                        <div class="d-flex justify-space-between align-center mx-10 mb-16">
-                          <v-btn depressed outlined color="grey">
-                            <v-icon color="red">fab fa-google</v-icon>
-                          </v-btn>
-                          <v-btn depressed outlined color="grey">
-                            <v-icon color="blue">fab fa-facebook-f</v-icon>
-                          </v-btn>
-                          <v-btn depressed outlined color="grey">
-                            <v-icon color="light-blue lighten-3">fab fa-twitter</v-icon>
-                          </v-btn>
-                        </div>
-                      </v-col>
-                    </v-row>
-                  </v-card-text>
-                </v-col>
-                <v-col cols="12" md="6" class="blue rounded-bl-xl">
-                  <div style="text-align: center; padding: 180px 0;">
-                    <v-card-text class="white--text">
-                      <h3 class="text-center">Ainda Não Tem uma Conta?</h3>
-                      <h6 class="text-center">
-                        Vamos configurar tudo para que você possa começar a criar<br> sua primeira experiência de onboarding
-                      </h6>
-                    </v-card-text>
-                    <div class="text-center">
-                      <v-btn tile outlined dark @click="step++">CADASTRAR-SE</v-btn>
-                    </div>
-                  </div>
-                </v-col>
-              </v-row>
-            </v-window-item>
+      <v-divider></v-divider>
 
-            <!-- Tela de Cadastro -->
-            <v-window-item :value="2">
-              <v-row>
-                <v-col cols="12" md="6" class="blue rounded-br-xl">
-                  <div style="text-align: center; padding: 180px 0;">
-                    <v-card-text class="white--text">
-                      <h3 class="text-center">Já Está Cadastrado?</h3>
-                      <h6 class="text-center">
-                        Faça login na sua conta para continuar construindo <br> e editando seus fluxos de onboarding
-                      </h6>
-                    </v-card-text>
-                    <div class="text-center">
-                      <v-btn tile outlined dark @click="step--">Entrar</v-btn>
-                    </div>
-                  </div>
-                </v-col>
-
-                <v-col cols="12" md="6">
-                  <v-card-text class="mt-12">
-                    <h4 class="text-center">Criar uma Conta</h4>
-                    <h6 class="text-center grey--text">
-                      Vamos configurar tudo para que você possa começar a criar sua<br> primeira experiência de onboarding
-                    </h6>
-                    <v-row align="center" justify="center">
-                      <v-col cols="12" sm="8">
-                        <v-text-field
-                          label="Nome de Usuário"
-                          outlined
-                          dense
-                          color="blue"
-                          autocomplete="false"
-                          v-model="registerUsername"
-                          class="mt-4"
-                        />
-                        <v-text-field
-                          label="Email"
-                          outlined
-                          dense
-                          color="blue"
-                          autocomplete="false"
-                          v-model="registerEmail"
-                        />
-                        <v-text-field
-                          label="Senha"
-                          outlined
-                          dense
-                          color="blue"
-                          autocomplete="false"
-                          type="password"
-                          v-model="registerPassword"
-                        />
-                        <v-row>
-                          <v-col cols="12" sm="7">
-                            <v-checkbox
-                              label="Aceito os Termos"
-                              class="mt-n1"
-                              color="blue"
-                            ></v-checkbox>
-                          </v-col>
-                          <v-col cols="12" sm="5">
-                            <span class="caption blue--text ml-n4">Termos e Condições</span>
-                          </v-col>
-                        </v-row>
-                        <v-btn color="blue" dark block tile @click="register">Cadastrar-se</v-btn>
-
-                        <h5 class="text-center grey--text mt-4 mb-3">Ou cadastre-se usando</h5>
-                        <div class="d-flex justify-space-between align-center mx-10 mb-11">
-                          <v-btn depressed outlined color="grey">
-                            <v-icon color="red">fab fa-google</v-icon>
-                          </v-btn>
-                          <v-btn depressed outlined color="grey">
-                            <v-icon color="blue">fab fa-facebook-f</v-icon>
-                          </v-btn>
-                          <v-btn depressed outlined color="grey">
-                            <v-icon color="light-blue lighten-3">fab fa-twitter</v-icon>
-                          </v-btn>
-                        </div>
-                      </v-col>
-                    </v-row>
-                  </v-card-text>
-                </v-col>
-              </v-row>
-            </v-window-item>
-          </v-window>
-        </v-card>
-      </v-col>
-    </v-row>
-  </v-container>
+      <v-row class="mt-5">
+        <v-col cols="12">
+          <h2 class="subheading grey--text text-center">Instituições Parceiras</h2>
+        </v-col>
+        <v-col v-for="instituicao in instituicoes" :key="instituicao.id" cols="12" md="4">
+          <v-card class="mx-auto" max-width="400">
+            <v-card-title>{{ instituicao.nome }}</v-card-title>
+            <v-card-text>
+              <p>Endereço: {{ instituicao.endereco }}</p>
+              <p>Telefone: {{ instituicao.telefone }}</p>
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-container>
+  </div>
 </template>
-<script>
-import axios from 'axios';
 
+<script>
 export default {
+  name: 'HomeView',
   data() {
     return {
-      step: 1,
-      loginEmail: '',
-      loginPassword: '',
-      registerUsername: '',
-      registerPassword: '',
-      registerEmail: '',
-      message: ''
+      // instituicoes: [
+      //   { id: 1, nome: 'Instituição A', endereco: 'Rua A, 123', telefone: '(11) 1111-1111' },
+      //   { id: 2, nome: 'Instituição B', endereco: 'Rua B, 456', telefone: '(22) 2222-2222' },
+      //   { id: 3, nome: 'Instituição C', endereco: 'Rua C, 789', telefone: '(33) 3333-3333' },
+      // ],
     };
   },
   methods: {
-    async login() {
-      try {
-        const { data } = await axios.post('http://localhost:5000/login', {
-          email: this.loginEmail,
-          senha: this.loginPassword
-        });
-        localStorage.setItem('access_token', data.access_token);
-        this.message = 'Login bem-sucedido!';
-        // Redirecionar ou realizar outras ações após o login
-      } catch (error) {
-        this.message = 'Credenciais inválidas';
-        console.error('Erro de login:', error);
-      }
+    navegarParaDoacoes() {
+      this.$router.push('/doacoes'); // Altere para a rota de doação correta
     },
-    async register() {
-      try {
-        await axios.post('http://localhost:5000/registro', {
-          nome_usuario: this.registerUsername,
-          email: this.registerEmail,
-          senha: this.registerPassword,
-          e_instituicao: false // Adicionar este campo se for necessário para seu backend
-        });
-        this.message = 'Cadastro bem-sucedido!';
-        // Redirecionar ou realizar outras ações após o registro
-      } catch (error) {
-        this.message = 'Erro ao cadastrar';
-        console.error('Erro de cadastro:', error);
-      }
-    }
-  }
-}
+    navegarParaCadastro() {
+      this.$router.push('/login'); // Altere para a rota de cadastro correta
+    },
+  },
+};
 </script>
 
 <style scoped>
-.v-application .rounded-bl-xl {
-  border-bottom-left-radius: 300px !important;
+.home {
+  padding: 20px;
 }
-.v-application .rounded-br-xl {
-  border-bottom-right-radius: 300px !important;
+
+.v-card {
+  margin: 15px 0;
 }
 </style>
