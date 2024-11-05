@@ -153,8 +153,7 @@ export default {
         sessionStorage.setItem('access_token', data.access_token);
         sessionStorage.setItem('user_id', data.id);
         sessionStorage.setItem('username', data.username);
-        // console.log('ID do usuário armazenado:', data.id);
-
+        sessionStorage.setItem('instituicao_id', data.instituicao);
 
         this.message = 'Login bem-sucedido!';
         this.$router.push('/home');
