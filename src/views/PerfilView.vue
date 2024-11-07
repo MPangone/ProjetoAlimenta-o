@@ -45,10 +45,10 @@
             </v-card-title>
             <v-card-text>
               <v-form ref="formUsuario">
-                <v-text-field v-model="usuarioEditado.nome_usuario" label="Nome de Usuário" required></v-text-field>
-                <v-text-field v-model="usuarioEditado.email" label="Email" required></v-text-field>
-                <v-text-field v-model="usuarioEditado.cpf_cnpj" label="CPF/CNPJ" required></v-text-field>
-                <v-text-field v-model="usuarioEditado.telefone" label="Telefone" required></v-text-field>
+                <v-text-field v-model="usuario.nome_usuario" label="Nome de Usuário" required></v-text-field>
+                <v-text-field v-model="usuario.email" label="Email" required></v-text-field>
+                <v-text-field v-model="usuario.cpf_cnpj" label="CPF/CNPJ" required></v-text-field>
+                <v-text-field v-model="usuario.telefone" label="Telefone" required></v-text-field>
               </v-form>
             </v-card-text>
             <v-card-actions>
@@ -104,11 +104,11 @@
     methods: {
       async buscarUsuario() {
         try {
-          const response = await axios.get(`http://localhost:5000/usuario`);
+          const response = await axios.get(`http://localhost:5000/usuarios/${sessionStorage.getItem('user_id')}`);
           this.usuario = response.data;
           if (this.usuario.e_instituicao) {
             await this.buscarInstituicao();
-          }
+          }' '
         } catch (error) {
           console.error('Erro ao buscar usuário:', error);
         }
@@ -131,7 +131,7 @@
       },
       async atualizarUsuario() {
         try {
-          await axios.put(`http://localhost:5000/usuario/${this.usuario.id}`, this.usuarioEditado);
+          await axios.put(`http://localhost:5000/usuarios/${this.usuario.id}`, this.usuarioEditado);
           this.usuario = { ...this.usuarioEditado };
           this.editarUsuarioDialog = false;
         } catch (error) {

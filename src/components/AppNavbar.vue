@@ -52,14 +52,29 @@ import AppPopup from './AppPopup.vue';
 
 export default {
   data() {
+    // return {
+    //   drawer: false,
+    //   links: [
+    //     { icon: 'house', text: 'Home', route: '/home' },
+    //     { icon: 'person', text: 'Perfil', route: '/perfil' },
+    //     // { icon: 'dashboard', text: 'Instituições', route: '/instituicao' },
+    //     { icon: 'mdi-food', text: 'Doações', route: '/doacoes' },
+    //   ]
+    // };
+    const links = [
+      { icon: 'house', text: 'Home', route: '/home' },
+      { icon: 'person', text: 'Perfil', route: '/perfil' },
+      // { icon: 'dashboard', text: 'Instituições', route: '/instituicao' },
+      { icon: 'mdi-food', text: 'Minhas Doações', route: '/doacoes' },
+    ];
+
+    if (sessionStorage.getItem('instituicao_id') !== null) {
+      links.push({ icon: 'mdi-home-city-outline', text: 'Doações Realizadas', route: '/doacoesinstituicoes' });
+    }
+
     return {
       drawer: false,
-      links: [
-        { icon: 'house', text: 'Home', route: '/home' },
-        { icon: 'person', text: 'Perfil', route: '/perfil' },
-        // { icon: 'dashboard', text: 'Instituições', route: '/instituicao' },
-        { icon: 'mdi-food', text: 'Doações', route: '/doacoes' },
-      ]
+      links,
     };
   },
   mounted() {
@@ -67,13 +82,21 @@ export default {
     if (storedUsername) {
       this.username = storedUsername;
     }
+    this.verificarLogin();
   },
   methods: {
+    verificarLogin() {
+        const logado = sessionStorage.getItem('user_id');
+        if (!logado) {
+            this.$router.push({ path: '/login' });
+        }
+    },
     sair() {
-      sessionStorage.removeItem('token'); // Remova o token do sessionStorage
+      sessionStorage.removeItem('token');
       sessionStorage.removeItem('access_token');
       sessionStorage.removeItem('user_id');
       sessionStorage.removeItem('username');
+      sessionStorage.removeItem('instituicao_id');
       this.$router.push({ path: '/login' }); // Redirecione para o login
     }
   },

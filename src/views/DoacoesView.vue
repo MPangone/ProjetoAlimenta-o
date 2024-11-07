@@ -13,6 +13,10 @@
           <span>{{ new Date(item.data).toLocaleDateString('pt-BR') }}</span>
         </template>
 
+        <template v-slot:item.recebido="{ item }">
+          <span>{{ item.recebido ? 'Sim' : 'Não' }}</span>
+        </template>
+
         <template v-slot:item.actions="{ item }">
           <v-btn icon @click="editarDoacao(item)">
             <v-icon>mdi-pencil</v-icon>
@@ -140,6 +144,7 @@ export default {
         { text: 'Doador', value: 'doador' },
         { text: 'Instituição', value: 'instituicao' },
         { text: 'Data da Doação', value: 'data' },
+        { text: 'Recebido', value: 'recebido' }, 
         { text: 'Ações', value: 'actions', sortable: false },
       ],
     };
@@ -257,7 +262,7 @@ export default {
         this.erroEnvio = false;
         this.resetarFormulario();
         this.dialogo = false;
-
+        this.buscarDoacoes(this.userLogado);
         setTimeout(() => {
           this.submissaoSucesso = false;
         }, 2000);
@@ -276,6 +281,7 @@ export default {
     },
     fecharDialogo() {
       this.dialogo = false;
+      this.buscarDoacoes(this.userLogado); 
     },
     onInstituicaoChange() {
       this.instituicaoError = '';
